@@ -16,11 +16,6 @@ app.post('/', function(req, res){
     let url = `https://api.coindesk.com/v1/bpi/currentprice/${currency}.json`;
     //get bitcoin rates from external API
     request(url, function(error, response, body){
-        console.log("Status Message: ", response.statusMessage);      
-        console.log("Server Status Code: ", response.statusCode);
-        //server response (the data we actually need)
-        console.log(response.body);
-
         //convert response string to json object
         let data = JSON.parse(response.body);
         let price;
@@ -44,11 +39,9 @@ app.post('/', function(req, res){
         res.send();
     
     });
-
-
 });
 
 
-app.listen(3000, function(){
+app.listen(process.env.PORT || 3000, function(){
     console.log("Server is running on port 3000");
 });
